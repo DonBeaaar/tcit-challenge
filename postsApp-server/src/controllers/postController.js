@@ -4,7 +4,7 @@ import { handleError } from '../utils/json'
 
 export const getAllPosts = async (req, res) => {
     try {
-        const posts = await PostsModel.findAll();
+        const posts = await PostsModel.findAll({order: [['id', 'DESC']]});
 
         res.json({
             ok: true,
@@ -25,6 +25,7 @@ export const createPost = async (req, res) => {
             postCreated
         })
     } catch (error) {
+        console.log(error);
         return handleError(res, error);
     }
 }
